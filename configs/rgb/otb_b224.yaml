@@ -1,0 +1,45 @@
+
+experiment:
+  name: actrack-otb_b224
+  output_dir: outputs/otb_b224
+  save_logs: true
+tracker:
+  confidence_threshold: 0
+  top_k_candidates: 1
+  mcitrack_root: third_party/MCITrack
+  mcitrack_yaml_name: mcitrack_b224
+  mcitrack_checkpoint: weights/mcitrack_b224.pth.tar
+  mcitrack_dataset_name: otb
+  mcitrack_debug: 0
+  mcitrack_use_motion_prior: true
+  mcitrack_motion_center_blend: 1.0
+  mcitrack_pretrained_root: pretrained
+motion:
+  perception_crop_factor: 2.5
+  search_expand_ratio: 2.5
+  sam3_conflict_detect_enabled: true
+  sam3_root: third_party/sam3
+  sam3_checkpoint: weights/sam3.pt
+  sam3_device: cuda
+  sam3_offload_video_to_cpu: true
+  sam3_offload_state_to_cpu: true
+  sam3_async_loading_frames: true
+  sam3_mask_logit_threshold: 0.0
+  sam3_obj_id: 1
+  sam3_apply_temporal_disambiguation: true
+  sam3_compile: false
+  sam3_min_obj_score_logits: 0.0
+agent:
+  vllm_model: doubao-seed-2-0-pro-260215
+  vllm_api_base: https://ark.cn-beijing.volces.com/api/v3
+  vllm_api_path: /responses
+  vllm_api_key_env: ARK_API_KEY
+  vllm_timeout_sec: 120
+  vllm_retries: 2000
+  vllm_circuit_breaker_sec: 0
+  vllm_retry_backoff_sec: 1.2
+  vllm_image_max_side: 320
+  vlm_reprompt_gate_enabled: true
+  vlm_reprompt_gate_k: 5
+  vlm_reprompt_gate_image_max_side: 1100
+  vlm_reprompt_gate_max_output_tokens: 16
